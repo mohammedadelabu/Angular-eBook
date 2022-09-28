@@ -1,0 +1,33 @@
+<div>
+  <app-sam-search (searchEmit)="onSearchRadio($event)"></app-sam-search>
+  <app-sam-filter
+  [all]="getAllCourses()"
+  [free]="getAllFreeCourses()"
+  [premium]="getAllPremiumCourses()"
+  (filterEmit)="onFilterRadio($event)"
+  ></app-sam-filter>
+</div>
+
+<ng-container *ngFor="let course of courses">
+  <!-- <div class="course-container" *ngIf="selectedSearchValue === '' || course.name.toLowerCase().includes(selectedSearchValue) "> -->
+  <div class="course-container" *ngIf="selectedRadioButtonValue === 'All' || selectedRadioButtonValue === course.type">
+    <div class="course-card">
+        <div>
+            <img [src]="course.image" style="width:220px; height:140px;">
+        </div>
+        <div class="course-name"><h6>{{course.name}}</h6></div>
+        <div class="course-description"><p>{{course.description.slice(0, 80)}}...</p></div>
+        <div class="details">
+            <div class="course-type" [ngStyle]="{color: course.type === 'Free' ? 'Green' : 'Red'}">{{course.type}}</div>
+            <div class="course-price"><b>Price:</b> ${{course.price}}</div>
+        </div>
+        <div class="course-buttons">
+            <button class="btn-btn btn-buy">Buy Now</button>
+            <button class="btn-btn btn-show">Show Details</button>
+        </div>
+    </div>
+</div>
+
+</ng-container>
+
+
